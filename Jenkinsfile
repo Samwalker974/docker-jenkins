@@ -13,8 +13,14 @@ pipeline {
                 sh 'echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin'
             }
         }      
-        stage('Checkout') { ... }   // récupérer le code GitHub
-        stage('Tests') { ... }      // lancer les tests backend
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+         } 
+        stage('Tests') { 
+    
+        }      
         stage('Build') { ... }      // construire les images
         stage('Push') { ... }       // pousser sur Docker Hub
         stage('Deploy') { ... }     // lancer docker compose
