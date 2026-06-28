@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh '''
                     cd mon-appli-todo/backend
-                    find . -name "*.test.js" | grep -v node_modules
+                    ls -la 
                     npm install
                     npm test
                 '''
