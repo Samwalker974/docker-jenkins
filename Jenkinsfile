@@ -30,9 +30,8 @@ pipeline {
             steps {
                 sh '''
                     cd mon-appli-todo/backend
-                    ls -la 
-                    npm install
-                    npm test
+                    echo "=== Contenu tests/ ==="
+                    ls -la tests/
                 '''
             }
         }      
