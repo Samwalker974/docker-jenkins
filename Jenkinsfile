@@ -21,7 +21,7 @@ pipeline {
         stage('Tests') { 
             steps {
                 sh '''
-                    cd frontend
+                    cd mon-appli-todo/frontend
                     npm install
                     npm test
                 '''         
@@ -30,8 +30,8 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                    docker build -t $DOCKER_USER/todo-frontend:$IMAGE_TAG ./frontend
-                    docker build -t $DOCKER_USER/todo-backend:$IMAGE_TAG ./backend
+                    docker build -t $DOCKER_USER/todo-frontend:$IMAGE_TAG mon-appli-todo/frontend
+                    docker build -t $DOCKER_USER/todo-backend:$IMAGE_TAG mon-appli-todo/backend
                 '''
             }
         }      
