@@ -21,12 +21,12 @@ pipeline {
         stage('Tests') { 
             steps {
                 sh '''
-                  docker run --rm \
-                    -v $(pwd)/mon-appli-todo/backend:/app \
-                    -w /app \
-                    node:18-alpine \
-                    sh -c "npm install && npm test"
-                '''         
+                 docker run --rm \
+                -v "$(pwd)/backend:/app" \
+                -w /app \
+                node:18-alpine \
+                sh -c "npm install && npm test"
+                '''       
             }
         }      
         stage('Build') { 
