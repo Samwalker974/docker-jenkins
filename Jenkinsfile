@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                  docker run --rm \
-                -v "$(pwd)/backend:/app" \
+                -v "$(pwd)/mon-appli-todo/backend:/app" \
                 -w /app \
                 node:18-alpine \
                 sh -c "npm install && npm test"
