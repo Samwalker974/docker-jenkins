@@ -24,7 +24,7 @@ pipeline {
                 sh '''
                 ls -la 
                  docker run --rm \
-                -v "$(pwd)/mon-appli-todo/backend:/app" \
+                -v ./mon-appli-todo/backend:/app \
                 -w /app \
                 node:18-alpine \
                 sh -c "npm install && npm test"
