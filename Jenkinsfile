@@ -20,15 +20,18 @@ pipeline {
             }
          } 
         stage('Tests') { 
+           agent {
+                docker {
+                    image 'node:18-alpine'
+                    args '-v /var/jenkins_home/workspace/test-connexion-github/mon-appli-todo/backend:/app -w /app'
+                }
+            }
             steps {
                 sh '''
-                ls -la 
-                 docker run --rm \
-                -v "$(pwd)/mon-appli-todo/backend:/app" \
-                -w /app \
-                node:18-alpine \
-                sh -c \"npm install && npm test\"
-                '''       
+                    cd mon-appli-todo/backend
+                    npm install
+                    npm test
+                '''
             }
         }      
         stage('Build') { 
