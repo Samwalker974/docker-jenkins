@@ -56,7 +56,7 @@ pipeline {
                 sh '''
                     FRONTEND_IMAGE=$DOCKER_USER/todo-frontend:$IMAGE_TAG \
                     BACKEND_IMAGE=$DOCKER_USER/todo-backend:$IMAGE_TAG \
-                    docker-compose -f mon-appli-todo/docker-compose.yml up -d --build
+                    docker-compose -f mon-appli-todo/docker-compose.yml up -d 
                 ''' 
             }
         }     
