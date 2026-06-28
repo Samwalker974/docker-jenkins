@@ -24,6 +24,7 @@ pipeline {
                 docker {
                     image 'node:18-alpine'
                     args '-v /var/jenkins_home/workspace/test-connexion-github/mon-appli-todo/backend:/app -w /app'
+                    reuseNode true
                 }
             }
             steps {
