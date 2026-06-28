@@ -19,13 +19,41 @@ pipeline {
             }
          } 
         stage('Tests') { 
-    
+            steps {
+                sh '''
+                    cd frontend
+                    npm install
+                    npm test
+                '''         
+            }
         }      
-        stage('Build') { ... }      // construire les images
-        stage('Push') { ... }       // pousser sur Docker Hub
-        stage('Deploy') { ... }     // lancer docker compose
+        stage('Build') { 
+            steps {
+                sh '''
+                    docker build -t $DOCKER_USER/todo-frontend:$IMAGE_TAG ./frontend
+                    docker build -t $DOCKER_USER/todo-backend:$IMAGE_TAG ./backend
+                '''
+            }
+        }      
+        stage('Push') { 
+            steps {
+                sh '''
+                    docker push $DOCKER_USER/todo-frontend:$IMAGE_TAG
+                    docker push $DOCKER_USER/todo-backend:$IMAGE_TAG
+                '''
+            }
+         }     
+        stage('Deploy') {      
+            steps {
+                sh '''
+                        FRONTEND_IMAGE=$DOCKER_USER/todo-frontend:$IMAGE_TAG \
+                        BACKEND_IMAGE=$DOCKER_USER/todo-backend:$IMAGE_TAG \
+                        docker compose -f docker-compose.yml up -d --build
+                    ''' 
+            }
+        }     
+        
     }
-
     post {
         always {
             sh 'docker logout'

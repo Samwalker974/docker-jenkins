@@ -1,0 +1,32 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8081:80"
+    networks:
+      - reseau_admin
+    depends_on:
+      - bdd
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    networks:
+      - reseau_admin
+    depends_on:
+      - bdd
+    environment:                             
+      - MONGO_URL=mongodb://bdd:27017/todos
+  bdd:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - reseau_admin
+    
+networks:
+  reseau_admin:
+volumes:
+  mongo_data:
