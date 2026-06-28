@@ -27,7 +27,7 @@ pipeline {
                 -v "$(pwd)/mon-appli-todo/backend:/app" \
                 -w /app \
                 node:18-alpine \
-                sh -c "npm install && npm test"
+                sh -c \"npm install && npm test\"
                 '''       
             }
         }      
